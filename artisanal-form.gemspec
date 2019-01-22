@@ -24,7 +24,8 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = ">= 2.4"
 
-  spec.add_runtime_dependency "dry-initializer", ">= 2.5.0"
+  spec.add_runtime_dependency "activemodel", ">= 4.2"
+  spec.add_runtime_dependency "artisanal-model"
 
   spec.add_development_dependency "dry-types", ">= 0.13.3"
   spec.add_development_dependency "pry", "~> 0.10"

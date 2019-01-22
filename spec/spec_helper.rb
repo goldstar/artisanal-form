@@ -25,3 +25,5 @@ RSpec.configure do |config|
   end
   config.order = :random
 end
+
+module Test; end
