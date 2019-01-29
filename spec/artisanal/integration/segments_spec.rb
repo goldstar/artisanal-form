@@ -16,11 +16,20 @@ RSpec.describe "Segments" do
       validates :city, presence: true
     end
 
+    class Profile
+      include Artisanal::Form(undefined: true)
+
+      attribute :age, Dry::Types::Any
+      validates :age, presence: true
+    end
+
     class Person
       include Artisanal::Form
 
       segment :contact, Contact
       segment :address, Address
+      segment :profile, Profile
+
       attribute :name, Dry::Types::Any
       validates :name, presence: true
     end
@@ -55,14 +64,14 @@ RSpec.describe "Segments" do
 
   describe "#status" do
     let(:data) {{
-      name: "John Smith",
       city: "Portland"
     }}
 
     it "returns the validation status of each segment" do
       expect(person.status).to eq(
         contact: :invalid,
-        address: :valid
+        address: :valid,
+        profile: :skipped
       )
     end
   end

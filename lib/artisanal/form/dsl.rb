@@ -51,6 +51,10 @@ module Artisanal::Form
         ([super(*args)] + segment_hash).reduce(&:deep_merge)
       end
 
+      def empty?
+        to_h.empty?
+      end
+
       def method_missing(name, *args, &block)
         segments[name] || super
       end
@@ -61,12 +65,12 @@ module Artisanal::Form
 
       def status
         segments.each.with_object({}) do |(name, segment), status|
-          if segment.invalid?
-            status[name] = :invalid
-          elsif segment.valid? && segment.present?
-            status[name] = :valid
-          else
+          if segment.empty?
             status[name] = :skipped
+          elsif segment.invalid?
+            status[name] = :invalid
+          elsif segment.valid?
+            status[name] = :valid
           end
         end
       end

@@ -8,11 +8,22 @@ module Artisanal::Form
 
     def initialize(name, constructor, options={})
       @name, @constructor = name, constructor
-      @options = { validate: true, errors: :merge }.merge(options)
+      @options = defaults.merge(options)
     end
 
     def included(base)
       base.validates_associated(name, options) if options[:validate]
+    end
+
+    protected
+
+    def defaults
+      {
+        validate: true,
+        errors: :merge,
+        unless: :empty?,
+        allow_blank: true
+      }
     end
   end
 end
