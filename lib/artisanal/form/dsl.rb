@@ -3,6 +3,7 @@ require 'active_support/core_ext/hash/deep_merge'
 module Artisanal::Form
   require_relative 'coordinator'
   require_relative 'initializer'
+  require_relative 'prepopulator'
   require_relative 'validators'
 
   module DSL
@@ -23,6 +24,10 @@ module Artisanal::Form
       coordinator.segment(*args)
     end
 
+    def prepopulator
+      const_get('Prepopulator')
+    end
+
     def validates_associated(name, options={})
       validates_with Validators::AssociatedValidator,
         { attributes: [name], errors: :deep }.merge(options)
@@ -34,6 +39,12 @@ module Artisanal::Form
       def assign_attributes(attributes)
         @segments = nil
         super(input.deep_merge!(attributes.to_h))
+      end
+
+      def prepopulate!(*args)
+        self.class.prepopulator.new(*args).tap do |prepopulator|
+          assign_attributes(prepopulator)
+        end
       end
 
       def segments
