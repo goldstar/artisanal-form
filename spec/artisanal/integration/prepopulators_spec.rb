@@ -17,18 +17,18 @@ RSpec.describe "Prepopulators" do
     end
 
     class Person::Prepopulator
-      attr_reader :name, :options
+      attr_reader :form, :name, :options
 
-      def initialize(name, options={})
-        @name, @options = name, options
+      def initialize(form, name, options={})
+        @form, @name, @options = form, name, options
       end
 
-      def to_h
-        {
+      def prepopulate!
+        form.assign_attributes(
           name: name,
           age: options[:age],
           email: options[:email]
-        }
+        )
       end
     end
   end

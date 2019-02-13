@@ -42,8 +42,8 @@ module Artisanal::Form
       end
 
       def prepopulate!(*args)
-        self.class.prepopulator.new(*args).tap do |prepopulator|
-          assign_attributes(prepopulator)
+        self.class.prepopulator.new(self, *args).tap do |prepopulator|
+          prepopulator.prepopulate!
         end
       end
 

@@ -3,8 +3,7 @@ module Artisanal::Form
     def initialize(*args)
     end
 
-    def to_h
-      {}
+    def prepopulate!
     end
   end
 end
