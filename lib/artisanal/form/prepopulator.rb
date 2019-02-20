@@ -1,5 +1,5 @@
 module Artisanal::Form
-  class Prepopulator
+  class NullPrepopulator
     def initialize(*args)
     end
 

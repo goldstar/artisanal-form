@@ -26,6 +26,8 @@ module Artisanal::Form
 
     def prepopulator
       const_get('Prepopulator')
+    rescue NameError
+      NullPrepopulator
     end
 
     def validates_associated(name, options={})
