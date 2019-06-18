@@ -1,4 +1,5 @@
 require 'active_model'
+require 'forwardable'
 
 module Artisanal
   require_relative "form/builder"
