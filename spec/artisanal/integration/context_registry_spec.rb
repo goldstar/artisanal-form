@@ -63,7 +63,7 @@ RSpec.describe "Context registry" do
     tags: [{}, {}],
     emails: [{}, {}]
   }}
-  
+
   let(:person) { ns::Examples::Person.new(data) }
   let(:address) { person.profile.address }
 

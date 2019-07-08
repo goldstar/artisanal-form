@@ -20,6 +20,13 @@ module Artisanal::Form
       @artisanal_form ||= Form.new(self)
     end
 
+    def inherited(subclass)
+      subclass.artisanal_form.context_registry.merge!(
+        artisanal_form.context_registry
+      )
+      super(subclass)
+    end
+
     def prepopulator
       const_get('Prepopulator')
     rescue NameError
