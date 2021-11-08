@@ -28,9 +28,11 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "artisanal-model"
   spec.add_runtime_dependency "dry-container"
 
+  spec.add_development_dependency "bundler", "~> 1.17.2"
   spec.add_development_dependency "dry-types", ">= 0.13.3"
   spec.add_development_dependency "pry", "~> 0.10"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "rspec-its", "~> 1.2"
+  spec.add_development_dependency "rspec_junit_formatter"
 end
